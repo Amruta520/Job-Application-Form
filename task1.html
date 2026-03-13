@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Job Application Form</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#6a11cb,#2575fc);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.form-container{
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    width:350px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+input, textarea{
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border:1px solid #ccc;
+    border-radius:5px;
+    font-size:14px;
+}
+
+textarea{
+    resize:none;
+    height:100px;
+}
+
+button{
+    width:100%;
+    padding:10px;
+    background:#2575fc;
+    color:white;
+    border:none;
+    border-radius:5px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1a5edb;
+}
+
+.error{
+    color:red;
+    font-size:13px;
+}
+
+.success{
+    color:green;
+    text-align:center;
+    margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="form-container">
+<h2>Contact / Job Application</h2>
+
+<form id="contactForm">
+
+<input type="text" id="name" placeholder="Full Name">
+<div class="error" id="nameError"></div>
+
+<input type="email" id="email" placeholder="Email Address">
+<div class="error" id="emailError"></div>
+
+<input type="tel" id="phone" placeholder="Phone Number" maxlength="10">
+<div class="error" id="phoneError"></div>
+
+<textarea id="message" placeholder="Your Message"></textarea>
+<div class="error" id="messageError"></div>
+
+<button type="submit">Submit</button>
+
+<div class="success" id="successMessage"></div>
+
+</form>
+</div>
+
+<script>
+
+document.getElementById("contactForm").addEventListener("submit", function(e){
+
+e.preventDefault();
+
+let name = document.getElementById("name").value.trim();
+let email = document.getElementById("email").value.trim();
+let phone = document.getElementById("phone").value.trim();
+let message = document.getElementById("message").value.trim();
+
+let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+let phonePattern = /^[0-9]{10}$/;
+
+let valid = true;
+
+document.getElementById("nameError").innerText="";
+document.getElementById("emailError").innerText="";
+document.getElementById("phoneError").innerText="";
+document.getElementById("messageError").innerText="";
+document.getElementById("successMessage").innerText="";
+
+if(name===""){
+document.getElementById("nameError").innerText="Name is required";
+valid=false;
+}
+
+if(email===""){
+document.getElementById("emailError").innerText="Email is required";
+valid=false;
+}
+else if(!emailPattern.test(email)){
+document.getElementById("emailError").innerText="Invalid email format";
+valid=false;
+}
+
+if(phone===""){
+document.getElementById("phoneError").innerText="Phone number is required";
+valid=false;
+}
+else if(!phonePattern.test(phone)){
+document.getElementById("phoneError").innerText="Phone number must be exactly 10 digits";
+valid=false;
+}
+
+if(message===""){
+document.getElementById("messageError").innerText="Message cannot be empty";
+valid=false;
+}
+
+if(valid){
+document.getElementById("successMessage").innerText="Form submitted successfully!";
+document.getElementById("contactForm").reset();
+}
+
+});
+
+</script>
+
+</body>
+</html>
